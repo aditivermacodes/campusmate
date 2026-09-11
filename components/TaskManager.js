@@ -105,7 +105,7 @@ export default function TaskManager() {
         </View>
 
         <TouchableOpacity style={styles.primaryButton} onPress={handleAddTask}>
-          <Text style={styles.primaryButtonText}>➕ Add Task</Text>
+          <Text style={styles.primaryButtonText}>Add Task</Text>
         </TouchableOpacity>
       </View>
 
@@ -135,8 +135,7 @@ export default function TaskManager() {
       {/* Task List */}
       {filteredTasks.length === 0 ? (
         <View style={styles.emptyBox}>
-          <Text style={styles.emptyIcon}>🎉</Text>
-          <Text style={styles.emptyText}>No tasks in this view!</Text>
+          <Text style={styles.emptyText}>No tasks in this view</Text>
         </View>
       ) : (
         filteredTasks.map((item) => (

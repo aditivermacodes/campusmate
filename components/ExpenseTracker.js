@@ -94,7 +94,7 @@ export default function ExpenseTracker() {
 
         <Text style={styles.label}>Category:</Text>
         <View style={styles.pillRow}>
-          {['Chai / Snacks', 'Stationery', 'Books', 'Travel', 'Other'].map((cat) => (
+          {['Grocery', 'Stationery', 'Books', 'Travel','Fruits and Vegetables', 'Other'].map((cat) => (
             <TouchableOpacity
               key={cat}
               style={[styles.pill, expenseCategory === cat && styles.pillActive]}
@@ -108,7 +108,7 @@ export default function ExpenseTracker() {
         </View>
 
         <TouchableOpacity style={styles.primaryButton} onPress={handleAddExpense}>
-          <Text style={styles.primaryButtonText}>💸 Add Expense Entry</Text>
+          <Text style={styles.primaryButtonText}>Add Expense Entry</Text>
         </TouchableOpacity>
       </View>
 

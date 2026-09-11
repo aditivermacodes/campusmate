@@ -87,12 +87,12 @@ export default function GpaCalculator() {
         <View style={styles.gpaStatusPill}>
           <Text style={styles.gpaStatusPillText}>
             {Number(calculatedSGPA) >= 9.0
-              ? '🏆 Outstanding (First Class with Distinction)'
+              ? 'Outstanding (First Class with Distinction)'
               : Number(calculatedSGPA) >= 8.0
-              ? '🌟 Excellent Performance'
+              ? 'Excellent Performance'
               : Number(calculatedSGPA) >= 7.0
-              ? '👍 Good Standing'
-              : '📚 Keep working hard!'}
+              ? 'Good Standing'
+              : 'Keep working hard!'}
           </Text>
         </View>
       </View>
@@ -139,7 +139,7 @@ export default function GpaCalculator() {
         </View>
 
         <TouchableOpacity style={styles.primaryButton} onPress={handleAddCourse}>
-          <Text style={styles.primaryButtonText}>➕ Add Subject to GPA</Text>
+          <Text style={styles.primaryButtonText}>Add Subject to GPA</Text>
         </TouchableOpacity>
       </View>
 

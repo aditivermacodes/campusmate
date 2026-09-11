@@ -33,13 +33,13 @@ export default function PomodoroTimer() {
       if (timerMode === 'focus') {
         setSessionsCompleted((prev) => prev + 1);
         showAlert(
-          '🎉 Focus Session Complete!',
-          'Great job! You crushed a 25-minute study sprint. Take a 5-minute break now.'
+          'Focus Session Complete!',
+          'Great job! You completed a 25-minute study sprint. Take a 5-minute break now.'
         );
         setTimerMode('break');
         setTimerSeconds(5 * 60);
       } else {
-        showAlert('⏰ Break Over!', 'Ready for another study round? Let’s get focused!');
+        showAlert('Break Over!', 'Ready for another study round? Let’s get focused!');
         setTimerMode('focus');
         setTimerSeconds(25 * 60);
       }
@@ -85,7 +85,7 @@ export default function PomodoroTimer() {
           onPress={() => switchTimerMode('focus')}
         >
           <Text style={[styles.modeTabText, timerMode === 'focus' && styles.modeTabTextActive]}>
-            🎯 Focus (25m)
+            Focus (25m)
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -93,7 +93,7 @@ export default function PomodoroTimer() {
           onPress={() => switchTimerMode('break')}
         >
           <Text style={[styles.modeTabText, timerMode === 'break' && styles.modeTabTextActive]}>
-            ☕ Break (5m)
+            Break (5m)
           </Text>
         </TouchableOpacity>
       </View>
@@ -116,21 +116,21 @@ export default function PomodoroTimer() {
           onPress={handleTimerToggle}
         >
           <Text style={styles.timerButtonText}>
-            {isTimerRunning ? '⏸️ Pause' : '▶️ Start Study'}
+            {isTimerRunning ? 'Pause' : 'Start Study'}
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.resetButton} onPress={handleTimerReset}>
-          <Text style={styles.resetButtonText}>🔄 Reset</Text>
+          <Text style={styles.resetButtonText}>Reset</Text>
         </TouchableOpacity>
       </View>
 
       {/* Study Stats */}
       <View style={styles.timerStatsCard}>
         <Text style={styles.timerStatsTitle}>Today's Focus Record</Text>
-        <Text style={styles.timerStatsNumber}>{sessionsCompleted} 🍅</Text>
+        <Text style={styles.timerStatsNumber}>{sessionsCompleted}</Text>
         <Text style={styles.timerStatsSub}>
-          {sessionsCompleted * 25} minutes of productive studying done!
+          {sessionsCompleted * 25} minutes of productive studying done
         </Text>
       </View>
     </View>

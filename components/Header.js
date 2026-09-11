@@ -22,7 +22,7 @@ export default function Header() {
       {/* App Branding Row */}
       <View style={styles.brandingRow}>
         <View>
-          <Text style={styles.appTitle}>🎓 CampusMate</Text>
+          <Text style={styles.appTitle}>CampusMate</Text>
           <Text style={styles.appSubtitle}>Your Daily Student & Study Hub</Text>
         </View>
         <View style={styles.badgeContainer}>

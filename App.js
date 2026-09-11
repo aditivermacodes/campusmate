@@ -35,7 +35,7 @@ export default function App() {
             onPress={() => setActiveTab('tasks')}
           >
             <Text style={[styles.navText, activeTab === 'tasks' && styles.navTextActive]}>
-              📋 Tasks
+              Tasks
             </Text>
           </TouchableOpacity>
 
@@ -44,7 +44,7 @@ export default function App() {
             onPress={() => setActiveTab('timer')}
           >
             <Text style={[styles.navText, activeTab === 'timer' && styles.navTextActive]}>
-              ⏱️ Focus
+              Focus
             </Text>
           </TouchableOpacity>
 
@@ -53,7 +53,7 @@ export default function App() {
             onPress={() => setActiveTab('gpa')}
           >
             <Text style={[styles.navText, activeTab === 'gpa' && styles.navTextActive]}>
-              📊 SGPA
+              SGPA
             </Text>
           </TouchableOpacity>
 
@@ -62,7 +62,7 @@ export default function App() {
             onPress={() => setActiveTab('expenses')}
           >
             <Text style={[styles.navText, activeTab === 'expenses' && styles.navTextActive]}>
-              💸 Expenses
+              Expenses
             </Text>
           </TouchableOpacity>
         </View>
