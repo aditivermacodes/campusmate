@@ -5,8 +5,8 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView,
 } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 
 // Modular Component Imports
@@ -17,11 +17,11 @@ import GpaCalculator from './components/GpaCalculator';
 import ExpenseTracker from './components/ExpenseTracker';
 
 export default function App() {
-  // Navigation State: 'tasks' | 'timer' | 'gpa' | 'expenses'
   const [activeTab, setActiveTab] = useState('tasks');
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.safeArea}>
       <StatusBar style="dark" />
       <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
         
@@ -81,6 +81,7 @@ export default function App() {
 
       </ScrollView>
     </SafeAreaView>
+  </SafeAreaProvider>
   );
 }
 
