@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  TextInput,
   TouchableOpacity,
   Alert,
   Platform,
@@ -16,11 +17,18 @@ const showAlert = (title, message) => {
   }
 };
 
+const PRESET_DURATIONS = [15, 25, 30, 45, 60];
+
 export default function PomodoroTimer() {
-  const [timerSeconds, setTimerSeconds] = useState(25 * 60); // 25 mins
+  const [focusMinutes, setFocusMinutes] = useState(25);
+  const [breakMinutes, setBreakMinutes] = useState(5);
+  const [customMinutesInput, setCustomMinutesInput] = useState('');
+
+  const [timerSeconds, setTimerSeconds] = useState(25 * 60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [timerMode, setTimerMode] = useState('focus'); // 'focus' | 'break'
   const [sessionsCompleted, setSessionsCompleted] = useState(0);
+  const [totalStudyMinutes, setTotalStudyMinutes] = useState(0);
 
   useEffect(() => {
     let interval = null;
@@ -32,20 +40,21 @@ export default function PomodoroTimer() {
       setIsTimerRunning(false);
       if (timerMode === 'focus') {
         setSessionsCompleted((prev) => prev + 1);
+        setTotalStudyMinutes((prev) => prev + focusMinutes);
         showAlert(
           'Focus Session Complete!',
-          'Great job! You completed a 25-minute study sprint. Take a 5-minute break now.'
+          `Great job! You completed your ${focusMinutes}-minute study sprint. Take a 5-minute break now.`
         );
         setTimerMode('break');
-        setTimerSeconds(5 * 60);
+        setTimerSeconds(breakMinutes * 60);
       } else {
         showAlert('Break Over!', 'Ready for another study round? Let’s get focused!');
         setTimerMode('focus');
-        setTimerSeconds(25 * 60);
+        setTimerSeconds(focusMinutes * 60);
       }
     }
     return () => clearInterval(interval);
-  }, [isTimerRunning, timerSeconds, timerMode]);
+  }, [isTimerRunning, timerSeconds, timerMode, focusMinutes, breakMinutes]);
 
   const formatTime = (totalSec) => {
     const mins = Math.floor(totalSec / 60);
@@ -61,21 +70,43 @@ export default function PomodoroTimer() {
 
   const handleTimerReset = () => {
     setIsTimerRunning(false);
-    setTimerSeconds(timerMode === 'focus' ? 25 * 60 : 5 * 60);
+    setTimerSeconds(timerMode === 'focus' ? focusMinutes * 60 : breakMinutes * 60);
   };
 
   const switchTimerMode = (mode) => {
     setIsTimerRunning(false);
     setTimerMode(mode);
-    setTimerSeconds(mode === 'focus' ? 25 * 60 : 5 * 60);
+    setTimerSeconds(mode === 'focus' ? focusMinutes * 60 : breakMinutes * 60);
+  };
+
+  const handleSelectPreset = (mins) => {
+    setIsTimerRunning(false);
+    setFocusMinutes(mins);
+    if (timerMode === 'focus') {
+      setTimerSeconds(mins * 60);
+    }
+  };
+
+  const handleApplyCustomMinutes = () => {
+    const parsed = parseInt(customMinutesInput.trim(), 10);
+    if (isNaN(parsed) || parsed < 1 || parsed > 180) {
+      showAlert('Invalid Duration', 'Please enter a study duration between 1 and 180 minutes.');
+      return;
+    }
+    setIsTimerRunning(false);
+    setFocusMinutes(parsed);
+    if (timerMode === 'focus') {
+      setTimerSeconds(parsed * 60);
+    }
+    setCustomMinutesInput('');
   };
 
   return (
     <View style={styles.container}>
       {/* Card Header */}
       <View style={styles.cardHeader}>
-        <Text style={styles.sectionTitle}>Study Pomodoro Timer</Text>
-        <Text style={styles.sectionSub}>Stay focused in 25-minute sprints</Text>
+        <Text style={styles.sectionTitle}>Study Focus Timer</Text>
+        <Text style={styles.sectionSub}>Customize your session duration and stay focused</Text>
       </View>
 
       {/* Mode Switcher */}
@@ -85,7 +116,7 @@ export default function PomodoroTimer() {
           onPress={() => switchTimerMode('focus')}
         >
           <Text style={[styles.modeTabText, timerMode === 'focus' && styles.modeTabTextActive]}>
-            Focus (25m)
+            Focus ({focusMinutes}m)
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -93,7 +124,7 @@ export default function PomodoroTimer() {
           onPress={() => switchTimerMode('break')}
         >
           <Text style={[styles.modeTabText, timerMode === 'break' && styles.modeTabTextActive]}>
-            Break (5m)
+            Break ({breakMinutes}m)
           </Text>
         </TouchableOpacity>
       </View>
@@ -125,12 +156,59 @@ export default function PomodoroTimer() {
         </TouchableOpacity>
       </View>
 
+      {/* Student Duration Settings Card */}
+      <View style={styles.durationCard}>
+        <Text style={styles.durationCardTitle}>Set Study Duration</Text>
+        <Text style={styles.durationCardSub}>Choose a preset or enter your custom study minutes</Text>
+
+        {/* Quick Presets */}
+        <View style={styles.presetRow}>
+          {PRESET_DURATIONS.map((mins) => (
+            <TouchableOpacity
+              key={mins}
+              style={[
+                styles.presetPill,
+                focusMinutes === mins && styles.presetPillActive,
+              ]}
+              onPress={() => handleSelectPreset(mins)}
+            >
+              <Text
+                style={[
+                  styles.presetPillText,
+                  focusMinutes === mins && styles.presetPillTextActive,
+                ]}
+              >
+                {mins}m
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* Custom Minutes Input */}
+        <View style={styles.customInputRow}>
+          <TextInput
+            style={styles.customTextInput}
+            placeholder="Custom min (e.g. 50)"
+            placeholderTextColor="#999"
+            keyboardType="numeric"
+            value={customMinutesInput}
+            onChangeText={setCustomMinutesInput}
+          />
+          <TouchableOpacity
+            style={styles.setCustomButton}
+            onPress={handleApplyCustomMinutes}
+          >
+            <Text style={styles.setCustomButtonText}>Set Time</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
       {/* Study Stats */}
       <View style={styles.timerStatsCard}>
         <Text style={styles.timerStatsTitle}>Today's Focus Record</Text>
         <Text style={styles.timerStatsNumber}>{sessionsCompleted}</Text>
         <Text style={styles.timerStatsSub}>
-          {sessionsCompleted * 25} minutes of productive studying done
+          {totalStudyMinutes} minutes of productive studying done
         </Text>
       </View>
     </View>
@@ -216,7 +294,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 12,
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 16,
   },
   timerButton: {
     flex: 2,
@@ -252,6 +330,86 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
+
+  // Duration Settings Card
+  durationCard: {
+    backgroundColor: '#FFFFFF',
+    padding: 16,
+    borderRadius: 16,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.06,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  durationCardTitle: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#1E293B',
+  },
+  durationCardSub: {
+    fontSize: 12,
+    color: '#64748B',
+    marginTop: 2,
+    marginBottom: 12,
+  },
+  presetRow: {
+    flexDirection: 'row',
+    gap: 8,
+    marginBottom: 12,
+  },
+  presetPill: {
+    flex: 1,
+    backgroundColor: '#F1F5F9',
+    paddingVertical: 8,
+    borderRadius: 10,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+  },
+  presetPillActive: {
+    backgroundColor: '#EFF6FF',
+    borderColor: '#2563EB',
+  },
+  presetPillText: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#475569',
+  },
+  presetPillTextActive: {
+    color: '#1D4ED8',
+    fontWeight: '700',
+  },
+  customInputRow: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  customTextInput: {
+    flex: 1,
+    backgroundColor: '#F8FAFC',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    fontSize: 14,
+    color: '#1E293B',
+  },
+  setCustomButton: {
+    backgroundColor: '#1E293B',
+    paddingHorizontal: 16,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  setCustomButtonText: {
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '700',
+  },
+
+  // Stats Card
   timerStatsCard: {
     backgroundColor: '#FFFFFF',
     padding: 16,

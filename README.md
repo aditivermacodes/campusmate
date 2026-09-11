@@ -7,7 +7,7 @@ A cross-platform student productivity app built with React Native and Expo. Camp
 ## Features
 
 - **Task Manager**: Add, complete, and filter assignments and academic deadlines. Completed tasks automatically move to the bottom of the list.
-- **Focus Timer**: 25-minute Pomodoro study sprints and 5-minute break intervals with session tracking.
+- **Focus Timer**: Customizable study timer with quick presets (15m, 25m, 30m, 45m, 60m), custom minute input, break mode, and session tracking.
 - **SGPA Calculator**: Real-time semester grade point average calculation based on credit hours and grades.
 - **Expense Tracker**: Log daily college expenses by category (Groceries, Books, Stationery, Travel) with running balance summaries.
 - **Motivational Quotes**: Tap-to-change study quotes for daily academic inspiration.
