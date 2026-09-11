@@ -7,7 +7,6 @@
 [![Expo SDK](https://img.shields.io/badge/Expo-SDK%2057-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
 [![React](https://img.shields.io/badge/React-19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Web-4E73DF?style=for-the-badge)](https://expo.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 <p align="center">
   A clean, cross-platform mobile application designed specifically for university students to manage deadlines, power through study sessions, calculate semester SGPA, and track daily hostel/campus expenses.
@@ -131,8 +130,4 @@ npm run web
 **Aditi Verma**  
 - GitHub: [@aditivermacodes](https://github.com/aditivermacodes)
 
----
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).

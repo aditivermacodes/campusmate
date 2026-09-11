@@ -26,7 +26,7 @@ export default function Header() {
           <Text style={styles.appSubtitle}>Your Daily Student & Study Hub</Text>
         </View>
         <View style={styles.badgeContainer}>
-          <Text style={styles.badgeText}>B.Tech / MCA</Text>
+          <Text style={styles.badgeText}>B.Tech </Text>
         </View>
       </View>
 
@@ -37,7 +37,7 @@ export default function Header() {
         onPress={handleNextQuote}
       >
         <Text style={styles.quoteText}>{STUDY_QUOTES[quoteIndex]}</Text>
-        <Text style={styles.quoteHint}>💡 Tap card for new motivation</Text>
+        <Text style={styles.quoteHint}> Tap card for new motivation</Text>
       </TouchableOpacity>
     </View>
   );
