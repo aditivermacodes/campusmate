@@ -25,7 +25,7 @@ export default function TaskManager() {
     { id: '1', title: 'Complete DSA Lab file & assignment', category: 'Assignment', done: false },
     { id: '2', title: 'Revise Operating System unit 2 notes', category: 'Exam', done: true },
     { id: '3', title: 'Practice React Native component styling', category: 'General', done: false },
-    { id: '4', title: 'Check hostel mess menu for dinner', category: 'Hostel', done: true },
+    { id: '4', title: 'Prepare presentation slides for Lab Seminar', category: 'General', done: true },
   ]);
 
   const handleAddTask = () => {
@@ -57,11 +57,17 @@ export default function TaskManager() {
     setTasks(tasks.filter((t) => !t.done));
   };
 
-  const filteredTasks = tasks.filter((t) => {
-    if (taskFilter === 'active') return !t.done;
-    if (taskFilter === 'done') return t.done;
-    return true;
-  });
+  // Filter tasks and sort so that completed tasks always move to the bottom of the list
+  const filteredTasks = tasks
+    .filter((t) => {
+      if (taskFilter === 'active') return !t.done;
+      if (taskFilter === 'done') return t.done;
+      return true;
+    })
+    .sort((a, b) => {
+      if (a.done === b.done) return 0;
+      return a.done ? 1 : -1;
+    });
 
   return (
     <View style={styles.container}>
@@ -85,7 +91,7 @@ export default function TaskManager() {
 
         {/* Category Pills */}
         <View style={styles.pillRow}>
-          {['Assignment', 'Exam', 'General', 'Hostel'].map((cat) => (
+          {['Assignment', 'Exam', 'Lab', 'General'].map((cat) => (
             <TouchableOpacity
               key={cat}
               style={[styles.pill, taskCategory === cat && styles.pillActive]}

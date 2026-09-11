@@ -24,7 +24,7 @@ export default function ExpenseTracker() {
   const [expenses, setExpenses] = useState([
     { id: 'e1', title: 'Evening Chai & Samosa', amount: 35, category: 'Chai / Snacks', time: '5:30 PM' },
     { id: 'e2', title: 'Assignment Xerox & Printout', amount: 40, category: 'Stationery', time: '1:15 PM' },
-    { id: 'e3', title: 'Hostel Room Supplies', amount: 120, category: 'Hostel', time: 'Yesterday' },
+    { id: 'e3', title: 'College Library Book & Xerox', amount: 90, category: 'Stationery', time: 'Yesterday' },
   ]);
 
   const handleAddExpense = () => {
@@ -60,7 +60,7 @@ export default function ExpenseTracker() {
       {/* Card Header */}
       <View style={styles.cardHeader}>
         <Text style={styles.sectionTitle}>Daily Pocket Expenses</Text>
-        <Text style={styles.sectionSub}>Keep track of college & hostel spending</Text>
+        <Text style={styles.sectionSub}>Keep track of daily college & student spending</Text>
       </View>
 
       {/* Balance Summary Hero */}
@@ -94,7 +94,7 @@ export default function ExpenseTracker() {
 
         <Text style={styles.label}>Category:</Text>
         <View style={styles.pillRow}>
-          {['Chai / Snacks', 'Stationery', 'Hostel', 'Travel', 'Other'].map((cat) => (
+          {['Chai / Snacks', 'Stationery', 'Books', 'Travel', 'Other'].map((cat) => (
             <TouchableOpacity
               key={cat}
               style={[styles.pill, expenseCategory === cat && styles.pillActive]}

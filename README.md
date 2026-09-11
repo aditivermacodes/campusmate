@@ -9,7 +9,7 @@
 [![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Web-4E73DF?style=for-the-badge)](https://expo.dev/)
 
 <p align="center">
-  A clean, cross-platform mobile application designed specifically for university students to manage deadlines, power through study sessions, calculate semester SGPA, and track daily hostel/campus expenses.
+  A clean, cross-platform mobile application designed specifically for university students to manage deadlines, power through study sessions, calculate semester SGPA, and track daily college and campus expenses.
 </p>
 
 [Quick Start](#-quick-start) • [Core Features](#-core-features) • [Architecture](#-project-architecture) • [Engineering Highlights](#-engineering--interview-talking-points) • [Author](#-author)
@@ -22,10 +22,10 @@
 
 | Module | Description | Key Capabilities |
 | :--- | :--- | :--- |
-| 📋 **Task Tracker** | Daily academic & hostel deadline manager | Priority tags (`Assignment`, `Exam`, `General`, `Hostel`), status filtering (`All`, `Active`, `Done`), checkmark strike-throughs, and single-tap cleanup. |
+| 📋 **Task Tracker** | Daily academic & task deadline manager | Priority tags (`Assignment`, `Exam`, `Lab`, `General`), automatic completed-to-bottom sorting, status filtering (`All`, `Active`, `Done`), checkmark strike-throughs, and single-tap cleanup. |
 | ⏱️ **Focus Timer** | Pomodoro study timer | 25-min study sprints + 5-min recharge break mode, live countdown circular readout, daily study streak counter (🍅), and completion alerts. |
 | 📊 **SGPA Calculator** | Semester GPA estimator | 10-point university grading scale (`O` to `F`), weighted credit calculation, dynamic course entry, and real-time academic distinction feedback. |
-| 💸 **Expense Tracker** | Student pocket expense logger | Quick category spending (`Chai / Snacks`, `Stationery`, `Hostel`, `Travel`), running total balance card, and timestamped transaction logs. |
+| 💸 **Expense Tracker** | Student pocket expense logger | Quick category spending (`Chai / Snacks`, `Stationery`, `Books`, `Travel`), running total balance card, and timestamped transaction logs. |
 | 💡 **Daily Motivation** | Interactive study quote card | Curated inspirational thoughts for engineering students; tap card anytime to cycle quotes. |
 
 ---
